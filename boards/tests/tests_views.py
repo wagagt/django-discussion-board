@@ -1,17 +1,25 @@
 from django.urls import reverse
 from django.urls import resolve
 from django.test import TestCase
-from .views import home, board_topics , new_topic
-from .models import Board, Topic, Post
 from django.contrib.auth.models import User
+# import sys;
+
+from .views import home, board_topics, new_topic
+from .models import Board, Topic, Post
 from .forms import NewTopicForm
 
+debug = True
+
+
+# test.py
+# print(__name__)
 
 class HomeTests(TestCase):
     def setUp(self):
         self.board = Board.objects.create(name='Django', description='Django board.')
         url = reverse('home')
         self.response = self.client.get(url)
+        # print(sys.path)
 
     def test_home_view_status_code(self):
         self.assertEquals(self.response.status_code, 200)
